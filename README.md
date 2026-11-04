@@ -1,5 +1,5 @@
 
- # Sistem Klinik - Kelompok JSONDOM
+Kelompok JSONDOM
 Tugas Project Pengembangan Aplikasi berbasis Platform (PBAD) 2026/2027 - Sistem Informasi.
 
 Sistem informasi klinik terintegrasi dengan tiga platform (Web, Mobile, Desktop) yang terhubung ke satu Centralized REST API (Node.js).
@@ -13,16 +13,6 @@ Sistem informasi klinik terintegrasi dengan tiga platform (Web, Mobile, Desktop)
 | 231121144 | M. Rafi Akbar | C | Mobile Client (React Native TypeScript) | ... |
 | 231121022 | Reyan Pratama | D | Desktop Client (C# WinForms) | ... |
 
-## Struktur Repository
-
-| Folder | Isi |
-|---|---|
-| `api/` | Server Node.js REST API dan database |
-| `web/` | Aplikasi web (React TypeScript) |
-| `mobile/` | Aplikasi mobile (React Native TypeScript) |
-| `desktop/` | Aplikasi desktop (C# WinForms) |
-| `docs/` | Dokumen analisis, desain, dan dokumentasi API |
-
 
 ## Aturan Kerja Tim
 
@@ -30,4 +20,4 @@ Sistem informasi klinik terintegrasi dengan tiga platform (Web, Mobile, Desktop)
 - Kerja di branch sendiri (contoh: `feature/web`), jangan push langsung ke `main`.
 - Gabungkan ke `main` lewat Pull Request.
 
-## Minimal Rajin la by Akmalz
+
