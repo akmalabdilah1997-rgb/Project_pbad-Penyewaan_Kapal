@@ -23,9 +23,6 @@ Sistem informasi klinik terintegrasi dengan tiga platform (Web, Mobile, Desktop)
 | `desktop/` | Aplikasi desktop (C# WinForms) |
 | `docs/` | Dokumen analisis, desain, dan dokumentasi API |
 
-## Entitas
-
-Pasien, Dokter, Jadwal Temu.
 
 ## Aturan Kerja Tim
 
