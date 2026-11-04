@@ -1,28 +1,27 @@
-CREATE TABLE IF NOT EXISTS pasien (
-    id_pasien INTEGER PRIMARY KEY AUTOINCREMENT,
-    nama_pasien VARCHAR(100) NOT NULL,
-    nomor_telepon VARCHAR(15),
-    tanggal_lahir DATE,
-    riwayat_singkat TEXT
+
+CREATE TABLE IF NOT EXISTS pelanggan (
+    id_pelanggan INTEGER PRIMARY KEY AUTOINCREMENT,
+    nama_pelanggan VARCHAR(100) NOT NULL,
+    no_hp VARCHAR(15)
 );
 
-CREATE TABLE IF NOT EXISTS dokter (
-    id_dokter INTEGER PRIMARY KEY AUTOINCREMENT,
-    nama_dokter VARCHAR(100) NOT NULL,
-    spesialisasi VARCHAR(100) NOT NULL,
-    hari_kerja VARCHAR(50), 
-    jam_kerja VARCHAR(20),  
-    status_ketersediaan VARCHAR(20) DEFAULT 'Aktif'
+CREATE TABLE IF NOT EXISTS kapal (
+    id_kapal INTEGER PRIMARY KEY AUTOINCREMENT,
+    nama_kapal VARCHAR(100) NOT NULL,
+    merek VARCHAR(100),
+    jenis VARCHAR(100),
+    harga_sewa INTEGER NOT NULL,
+    status_kapal VARCHAR(20) DEFAULT 'Tersedia',
+    catatan TEXT
 );
 
-CREATE TABLE IF NOT EXISTS jadwal_temu (
-    id_jadwal INTEGER PRIMARY KEY AUTOINCREMENT,
-    id_pasien INTEGER NOT NULL,
-    id_dokter INTEGER NOT NULL,
-    tanggal_kunjungan DATE NOT NULL,
-    jam_sesi VARCHAR(10), 
-    status_antrean VARCHAR(20) DEFAULT 'Menunggu',
+CREATE TABLE IF NOT EXISTS penyewaan (
+    id_sewa INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_pelanggan INTEGER NOT NULL,
+    id_kapal INTEGER NOT NULL,
+    tanggal_sewa DATE NOT NULL,
+    status_pesanan VARCHAR(20) DEFAULT 'Menunggu ACC',
     catatan TEXT,
-    FOREIGN KEY (id_pasien) REFERENCES pasien(id_pasien) ON DELETE CASCADE,
-    FOREIGN KEY (id_dokter) REFERENCES dokter(id_dokter) ON DELETE CASCADE
+    FOREIGN KEY (id_pelanggan) REFERENCES pelanggan(id_pelanggan) ON DELETE CASCADE,
+    FOREIGN KEY (id_kapal) REFERENCES kapal(id_kapal) ON DELETE CASCADE
 );

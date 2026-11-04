@@ -3,9 +3,10 @@ const express = require('express');
 const cors = require('cors');
 const { initializeDatabase } = require('./src/config/database');
 const testRoutes =  require('./src/routes/test');
-const pasienRoutes = require('./src/routes/pasienRoutes')
-const dokterRoutes = require('./src/routes/dokterRoutes');
-const jadwalTemuRoutes = require('./src/routes/jadwalTemuRoutes');
+const pelangganRoutes = require('./src/routes/pelangganRoutes'); 
+const kapalRoutes = require('./src/routes/kapalRoutes');         
+const penyewaanRoutes = require('./src/routes/penyewaanRoutes');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -17,28 +18,28 @@ app.use(express.urlencoded({ extended: true }));
 /* Root route */
 app.get('/', (req, res) => {
   res.json({
-    message: '🚀 API Sistem Klinik is running',
+    message: '🚀 API Sistem Sewa Kapal is running',
     endpoints: {
-      'PASIEN': {
-        'GET    /api/products':      'Ambil semua data pasien',
-        'GET    /api/products/:id':  'Ambil pasien by id',
-        'POST   /api/products':      'Buat pasien baru',
-        'PUT    /api/products/:id':  'Update data pasien',
-        'DELETE /api/products/:id':  'Hapus data pasien',
+      'PELANGGAN': {
+        'GET    /api/pelanggan':      'Ambil semua data pelanggan',
+        'GET    /api/pelanggan/:id':  'Ambil pelanggan by id',
+        'POST   /api/pelanggan':      'Buat pelanggan baru',
+        'PUT    /api/pelanggan/:id':  'Update data pelanggan',
+        'DELETE /api/pelanggan/:id':  'Hapus data pelanggan',
       },
-      'DOKTER': {
-        'GET    /api/dokter':        'Ambil semua data dokter',
-        'GET    /api/dokter/:id':    'Ambil dokter by id',
-        'POST   /api/dokter':        'Buat dokter baru',
-        'PUT    /api/dokter/:id':    'Update data dokter',
-        'DELETE /api/dokter/:id':    'Hapus data dokter',
+      'KAPAL': {
+        'GET    /api/kapal':          'Ambil semua data kapal',
+        'GET    /api/kapal/:id':      'Ambil kapal by id',
+        'POST   /api/kapal':          'Buat kapal baru',
+        'PUT    /api/kapal/:id':      'Update data kapal',
+        'DELETE /api/kapal/:id':      'Hapus data kapal',
       },
-      'JADWAL TEMU': {
-        'GET    /api/jadwal-temu':       'Ambil semua data jadwal',
-        'GET    /api/jadwal-temu/:id':   'Ambil jadwal by id',
-        'POST   /api/jadwal-temu':       'Buat jadwal baru',
-        'PUT    /api/jadwal-temu/:id':   'Update data jadwal',
-        'DELETE /api/jadwal-temu/:id':   'Hapus data jadwal',
+      'PENYEWAAN': {
+        'GET    /api/penyewaan':      'Ambil semua data penyewaan',
+        'GET    /api/penyewaan/:id':  'Ambil penyewaan by id',
+        'POST   /api/penyewaan':      'Buat penyewaan baru',
+        'PUT    /api/penyewaan/:id':  'Update data penyewaan',
+        'DELETE /api/penyewaan/:id':  'Hapus data penyewaan',
       }
     },
   });
@@ -46,9 +47,9 @@ app.get('/', (req, res) => {
 
 /* Routes */
 app.use('/api/test', testRoutes);
-app.use('/api/pasien', pasienRoutes);
-app.use('/api/dokter', dokterRoutes);         
-app.use('/api/jadwal-temu', jadwalTemuRoutes); 
+app.use('/api/pelanggan', pelangganRoutes); 
+app.use('/api/kapal', kapalRoutes);         
+app.use('/api/penyewaan', penyewaanRoutes); 
 
 /* 404 */
 app.use((req, res) => {
