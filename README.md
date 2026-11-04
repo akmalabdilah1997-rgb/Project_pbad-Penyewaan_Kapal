@@ -2,8 +2,6 @@
 Kelompok JSONDOM
 Tugas Project Pengembangan Aplikasi berbasis Platform (PBAD) 2026/2027 - Sistem Informasi.
 
-Sistem informasi klinik terintegrasi dengan tiga platform (Web, Mobile, Desktop) yang terhubung ke satu Centralized REST API (Node.js).
-
 ## Anggota Kelompok
 
 | NIM | Nama | Role | Tanggung Jawab | GitHub |
