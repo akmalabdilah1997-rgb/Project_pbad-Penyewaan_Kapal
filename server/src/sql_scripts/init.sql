@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS penyewaan (
     id_pelanggan INTEGER NOT NULL,
     id_kapal INTEGER NOT NULL,
     tanggal_sewa DATE NOT NULL,
+    tanggal_pengembalian DATE NOT NULL, -- Kolom baru ditambahkan di sini
     status_pesanan VARCHAR(20) DEFAULT 'Menunggu ACC',
     catatan TEXT,
     FOREIGN KEY (id_pelanggan) REFERENCES pelanggan(id_pelanggan) ON DELETE CASCADE,
