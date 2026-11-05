@@ -1,103 +1,52 @@
 const { dbRun, dbGet, dbAll } = require('../middlewares_helpers/sqlite3_helpers');
 
 /* =============== READ (all) =============== */
-const findAllPenyewaan = async () => {
-  return await dbAll('SELECT * FROM penyewaan ORDER BY id_sewa DESC');
+const findAllPelanggan = async () => {
+  return await dbAll('SELECT * FROM pelanggan ORDER BY id_pelanggan DESC');
 };
 
 /* =============== READ (by id) =============== */
-const findPenyewaanById = async (id) => {
-  return await dbGet('SELECT * FROM penyewaan WHERE id_sewa = ?', [id]);
+const findPelangganById = async (id) => {
+  return await dbGet('SELECT * FROM pelanggan WHERE id_pelanggan = ?', [id]);
 };
 
 /* =============== CREATE =============== */
-const createPenyewaan = async (body) => {
-  const query = `
-    INSERT INTO penyewaan (id_pelanggan, id_kapal, tanggal_sewa, status_pesanan, catatan)
-    VALUES (?, ?, ?, ?, ?)
-  `;
-  const values = [
-    body.id_pelanggan,
-    body.id_kapal,
-    body.tanggal_sewa,
-    body.status_pesanan || 'Menunggu ACC', // Default status 
-    body.catatan ?? null,
-  ];
-
+const createPelanggan = async (body) => {
+  const query = `INSERT INTO pelanggan (nama_pelanggan, no_hp) VALUES (?, ?)`;
+  const values = [body.nama_pelanggan, body.no_hp];
+  
   const { lastID } = await dbRun(query, values);
-  return await findPenyewaanById(lastID);
+  return await findPelangganById(lastID);
 };
 
 /* =============== UPDATE =============== */
-const updatePenyewaan = async (id, body) => {
-  const existing = await findPenyewaanById(id);
+const updatePelanggan = async (id, body) => {
+  const existing = await findPelangganById(id);
   if (!existing) return null;
 
-  const query = `
-    UPDATE penyewaan
-    SET id_pelanggan = ?, id_kapal = ?, tanggal_sewa = ?, status_pesanan = ?, catatan = ?
-    WHERE id_sewa = ?
-  `;
+  const query = `UPDATE pelanggan SET nama_pelanggan = ?, no_hp = ? WHERE id_pelanggan = ?`;
   const values = [
-    body.id_pelanggan ?? existing.id_pelanggan,
-    body.id_kapal ?? existing.id_kapal,
-    body.tanggal_sewa ?? existing.tanggal_sewa,
-    body.status_pesanan ?? existing.status_pesanan,
-    body.catatan ?? existing.catatan,
-    id,
+    body.nama_pelanggan ?? existing.nama_pelanggan,
+    body.no_hp ?? existing.no_hp,
+    id
   ];
 
   await dbRun(query, values);
-  return await findPenyewaanById(id);
+  return await findPelangganById(id);
 };
 
 /* =============== DELETE =============== */
-const deletePenyewaan = async (id) => {
-  const { changes } = await dbRun('DELETE FROM penyewaan WHERE id_sewa = ?', [id]);
+const deletePelanggan = async (id) => {
+  const { changes } = await dbRun('DELETE FROM pelanggan WHERE id_pelanggan = ?', [id]);
   return changes > 0;
 };
 
-/* =============== BULK CREATE =============== */
-const bulkCreatePenyewaan = async (penyewaanList) => {
-  await dbRun('BEGIN TRANSACTION');
-
-  try {
-    const createdPenyewaan = [];
-
-    for (const item of penyewaanList) {
-      const result = await dbRun(
-        `INSERT INTO penyewaan
-          (id_pelanggan, id_kapal, tanggal_sewa, status_pesanan, catatan)
-         VALUES (?, ?, ?, ?, ?)`,
-        [
-          item.id_pelanggan,
-          item.id_kapal,
-          item.tanggal_sewa,
-          item.status_pesanan || 'Menunggu ACC',
-          item.catatan ?? null,
-        ]
-      );
-
-      createdPenyewaan.push({
-        id_sewa: result.lastID,
-        ...item,
-      });
-    }
-
-    await dbRun('COMMIT');
-
-    return createdPenyewaan;
-  } catch (error) {
-    await dbRun('ROLLBACK');
-    throw error;
-  }
-};
+/* =============== EXPORT SEMUA FUNGSI =============== */
 
 module.exports = {
-  findAllPenyewaan,
-  findPenyewaanById,
-  createPenyewaan,
-  updatePenyewaan,
-  deletePenyewaan,
-  bulkCreatePenyewaan
+  findAllPelanggan,
+  findPelangganById,
+  createPelanggan,
+  updatePelanggan,
+  deletePelanggan
 };
