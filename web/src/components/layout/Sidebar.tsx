@@ -1,0 +1,3 @@
+export function Sidebar() {
+  return <aside className="sidebar"><div className="brand"><span className="brand-mark">◒</span><span>sailora</span></div><div className="workspace-label">MAIN MENU</div><nav><button className="nav-item active"><span>◈</span>Armada kapal</button></nav><div className="sidebar-bottom"><div className="workspace-label">SYSTEM</div><button className="nav-item"><span>⚙</span>Pengaturan</button><div className="help-card"><div className="help-icon">?</div><b>Butuh bantuan?</b><p>Pelajari cara mengelola Sailora.</p><button>Help center ↗</button></div><div className="sidebar-footer">Sailora v1.0.0<br /><span>© 2024 Sailora Team</span></div></div></aside>
+}
